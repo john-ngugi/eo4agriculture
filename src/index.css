@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* index.css or App.css */
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.custom-attribution {
+  bottom: 0 !important;
+  right: 0 !important;
+  left: auto !important;
+  top: auto !important;
+  position: absolute;
+  margin: 0.5em;
+  background-color: rgba(255,255,255,0.9);
+  padding: 2px 5px;
+  font-size: 0.8em;
+}
+
+
+/* Custom scrollbar styles - Add to your global CSS or index.css */
+/* @import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap'); */
+
+/* Apply font family globally */
+* {
+  font-family: "Onest", sans-serif;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(239, 171, 36);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(0, 154, 71);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(1, 121, 57);
+}
+
+/* Ensure proper font weights for different elements */
+p, small {
+  color: #363636;
+}
+
+/* For the header text in carousel */
+.header-text {
+  font-weight: bold;
+  font-size: 75px;
+}
+
+/* Add any other custom styles that Tailwind doesn't cover */
