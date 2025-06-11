@@ -256,7 +256,9 @@ const availableLayers: LayerConfig[] = [
 const MapView: React.FC = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<Map | null>(null);
-
+  const [currentLULCData, setCurrentLULCData] =
+    useState<LULCData>(sampleLULCData);
+  // State to manage active layers and their visibility
   const [activeLayers, setActiveLayers] = useState<ActiveLayer[]>([]);
   const [selectedLayerId, setSelectedLayerId] = useState<number | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -272,6 +274,18 @@ const MapView: React.FC = () => {
     content: string;
   } | null>(null);
   const [overlayRef, setOverlayRef] = useState<Overlay | null>(null);
+
+  // 2. Create a mapping object for subcounty data lookup
+  const subcountyDataMap: { [key: string]: LULCData } = {
+    kangema: kangemaLULCData,
+    kigumo: kigumoLULCData,
+    gatanga: gatangaLULCData,
+    maragwa: maragwaLULCData,
+    mathioya: mathioyaLULCData,
+    kandara: kandaraLULCData,
+    kiharu: kiharuLULCData,
+  };
+
   useEffect(() => {
     if (!mapRef.current) return;
 
@@ -360,6 +374,7 @@ const MapView: React.FC = () => {
       opacity: opacity,
     });
   };
+
   const createLocalGeoJSONLayer = (
     layerConfig: LayerConfig,
     opacity: number = 0.8
@@ -376,7 +391,7 @@ const MapView: React.FC = () => {
 
     layer.setOpacity(opacity);
 
-    // Add hover interaction
+    // Add hover and click interactions
     if (mapInstanceRef.current && overlayRef) {
       const map = mapInstanceRef.current;
 
@@ -394,7 +409,7 @@ const MapView: React.FC = () => {
           const coordinate = evt.coordinate;
 
           overlayRef.setPosition(coordinate);
-          overlayRef.getElement()!.innerHTML = `<strong>${admen2}</strong>`;
+          overlayRef.getElement()!.innerHTML = `<strong>${admen2}</strong><br><small>Click to view data</small>`;
           overlayRef.getElement()!.style.display = "block";
 
           if (targetElement) {
@@ -408,14 +423,54 @@ const MapView: React.FC = () => {
         }
       };
 
-      map.on("pointermove", pointerMoveHandler);
+      // NEW: Add click handler
+      const clickHandler = (evt: any) => {
+        const pixel = map.getEventPixel(evt.originalEvent);
+        const feature = map.forEachFeatureAtPixel(pixel, (feature, layer) => {
+          if (layer === layer) return feature;
+        });
 
-      // Store the handler for cleanup
+        if (feature) {
+          const subcountyName = feature.get("ADM2_EN");
+          if (subcountyName) {
+            // Convert to lowercase for matching
+            const normalizedName = subcountyName.toLowerCase().trim();
+
+            // Look for matching LULC data
+            const matchingData = subcountyDataMap[normalizedName];
+
+            if (matchingData) {
+              // Update the dashboard data
+              setCurrentLULCData(matchingData);
+
+              // Show dashboard if it was hidden
+              setIsDashboardVisible(true);
+
+              // Optional: Show a brief notification
+              console.log(`Updated dashboard with data for: ${subcountyName}`);
+            } else {
+              // Fallback to county data if subcounty not found
+              setCurrentLULCData(sampleLULCData);
+              setIsDashboardVisible(true);
+              console.log(
+                `No specific data found for ${subcountyName}, showing county data`
+              );
+            }
+          }
+        }
+      };
+
+      map.on("pointermove", pointerMoveHandler);
+      map.on("click", clickHandler); // Add click listener
+
+      // Store both handlers for cleanup
       layer.set("pointerMoveHandler", pointerMoveHandler);
+      layer.set("clickHandler", clickHandler);
     }
 
     return layer;
   };
+
   const createWFSLayer = (layerConfig: LayerConfig, opacity: number = 0.8) => {
     // Check if this is our local GeoJSON layer
     if (layerConfig.id === 7) {
@@ -491,18 +546,23 @@ const MapView: React.FC = () => {
       setIsDashboardVisible(true);
     }
   };
-  // Update the removeLayer function to clean up hover handlers
+  // 4. Update the removeLayer function to clean up click handlers
   const removeLayer = (layerId: number) => {
     if (!mapInstanceRef.current) return;
 
     const layerToRemove = activeLayers.find((l) => l.id === layerId);
     if (!layerToRemove || !layerToRemove.olLayer) return;
 
-    // Clean up hover handler for local GeoJSON layer
+    // Clean up event handlers for local GeoJSON layer
     if (layerId === 7) {
-      const handler = layerToRemove.olLayer.get("pointerMoveHandler");
-      if (handler) {
-        mapInstanceRef.current.un("pointermove", handler);
+      const pointerHandler = layerToRemove.olLayer.get("pointerMoveHandler");
+      const clickHandler = layerToRemove.olLayer.get("clickHandler");
+
+      if (pointerHandler) {
+        mapInstanceRef.current.un("pointermove", pointerHandler);
+      }
+      if (clickHandler) {
+        mapInstanceRef.current.un("click", clickHandler);
       }
     }
 
@@ -528,6 +588,7 @@ const MapView: React.FC = () => {
       setIsDashboardVisible(false);
     }
   };
+
   // Update the toggleLayerVisibility function
   const toggleLayerVisibility = (layerId: number) => {
     setActiveLayers((prev) =>
@@ -586,6 +647,10 @@ const MapView: React.FC = () => {
 
   const selectedLayer = activeLayers.find((l) => l.id === selectedLayerId);
 
+  const resetToCountyData = () => {
+    setCurrentLULCData(sampleLULCData);
+  };
+
   return (
     <div className="relative w-full h-full overflow-hidden">
       {/* Map Container */}
@@ -593,6 +658,12 @@ const MapView: React.FC = () => {
 
       {/* Dashboard Controls - Top Left */}
       <div className="absolute top-4 left-4 z-20 flex gap-2">
+        <button
+          onClick={resetToCountyData}
+          className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
+        >
+          📍 County View
+        </button>
         <button
           onClick={() => setIsDashboardVisible(!isDashboardVisible)}
           className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 shadow-lg ${
@@ -851,7 +922,7 @@ const MapView: React.FC = () => {
         }}
       >
         <div className="backdrop-blur-md bg-white/95 rounded-2xl shadow-2xl border border-gray-200/50">
-          <LULCDashboard data={sampleLULCData} />
+          <LULCDashboard data={currentLULCData} />
         </div>
       </div>
 
