@@ -1,5 +1,5 @@
 // src/context/MapContext.tsx
-import React, { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext } from "react";
 import type { ReactNode } from "react";
 import type Map from "ol/Map";
 import ImageLayer from "ol/layer/Image";

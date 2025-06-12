@@ -240,7 +240,7 @@ const LULCDashboard: React.FC<LULCDashboardProps> = ({ data = sampleData }) => {
                 : "text-gray-600 bg-gray-100 hover:bg-gray-200"
             }`}
           >
-             Distribution View
+            Distribution View
           </button>
           <button
             onClick={() => setActiveView("bar")}
@@ -250,7 +250,7 @@ const LULCDashboard: React.FC<LULCDashboardProps> = ({ data = sampleData }) => {
                 : "text-gray-600 bg-gray-100 hover:bg-gray-200"
             }`}
           >
-          Comparison View
+            Comparison View
           </button>
         </div>
       </div>
@@ -276,7 +276,7 @@ const LULCDashboard: React.FC<LULCDashboardProps> = ({ data = sampleData }) => {
                 Land Use Classes
               </h3>
               <div className="space-y-2 max-h-64 overflow-y-auto overflow-x-hidden">
-                {classes.map((className, index) => (
+                {classes.map((className) => (
                   <div
                     key={className}
                     className={`flex items-center justify-between p-3 rounded-lg border transition-all duration-300 cursor-pointer ${
