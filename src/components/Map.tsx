@@ -8,9 +8,6 @@ import OSM from "ol/source/OSM";
 import VectorSource from "ol/source/Vector";
 import GeoJSON from "ol/format/GeoJSON";
 import Overlay from "ol/Overlay";
-import { getCenter } from "ol/extent";
-import { unByKey } from "ol/Observable";
-
 import { bbox as bboxStrategy } from "ol/loadingstrategy";
 import { fromLonLat } from "ol/proj";
 import Attribution from "ol/control/Attribution";
@@ -269,10 +266,10 @@ const MapView: React.FC = () => {
   >("left");
   // New state for legend collapse
   const [isLegendCollapsed, setIsLegendCollapsed] = useState(false);
-  const [tooltip, setTooltip] = useState<{
-    coordinate: [number, number];
-    content: string;
-  } | null>(null);
+  // const [tooltip, setTooltip] = useState<{
+  //   coordinate: [number, number];
+  //   content: string;
+  // } | null>(null);
   const [overlayRef, setOverlayRef] = useState<Overlay | null>(null);
 
   // 2. Create a mapping object for subcounty data lookup
@@ -781,7 +778,7 @@ const MapView: React.FC = () => {
 
               {/* Active Layers List */}
               <div className="max-h-96 overflow-y-auto">
-                {activeLayers.map((layer, index) => (
+                {activeLayers.map((layer) => (
                   <div
                     key={layer.id}
                     className={`border-b border-gray-100 last:border-b-0 ${
