@@ -48,6 +48,7 @@ interface ActiveLayer extends LayerConfig {
 interface LULCData {
   areaName: string;
   level: "county" | "subcounty";
+  year: number;
   classes: {
     [className: string]: {
       hectares: number;
@@ -57,9 +58,10 @@ interface LULCData {
 }
 
 // Sample LULC data for the dashboard
-const sampleLULCData: LULCData = {
+const sampleLULCData2022: LULCData = {
   areaName: "Murang'a County",
   level: "county",
+  year: 2022,
   classes: {
     Crop: { hectares: 129919.25, percentage: 51.1 },
     Trees: { hectares: 51423.65, percentage: 20.23 },
@@ -72,9 +74,25 @@ const sampleLULCData: LULCData = {
   },
 };
 
-const kangemaLULCData: LULCData = {
+// Create county-level 2024 data 
+const sampleLULCData2024: LULCData = {
+  areaName: "Murang'a County",
+  level: "county",
+  year: 2024,
+  classes: {
+    Trees: { hectares: 136632.57, percentage: 56.41 },
+    Crop: { hectares: 71384.12, percentage: 29.47 },
+    "Bare Ground": { hectares: 26378.49, percentage: 10.89 },
+    Building: { hectares: 5709.85, percentage: 2.36 },
+    Grass: { hectares: 1500.99, percentage: 0.62 },
+    Water: { hectares: 601.3, percentage: 0.25 },
+  },
+};
+
+const kangemaLULCData2022: LULCData = {
   areaName: "Kangema",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 35461.43, percentage: 51.29 },
     Trees: { hectares: 25498.97, percentage: 36.87 },
@@ -87,9 +105,10 @@ const kangemaLULCData: LULCData = {
   },
 };
 
-const kigumoLULCData: LULCData = {
+const kigumoLULCData2022: LULCData = {
   areaName: "Kigumo",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 35650.82, percentage: 50.37 },
     Trees: { hectares: 26024.37, percentage: 36.79 },
@@ -101,9 +120,11 @@ const kigumoLULCData: LULCData = {
     "Bare Ground": { hectares: 13.61, percentage: 0.02 },
   },
 };
-const gatangaLULCData: LULCData = {
+
+const gatangaLULCData2022: LULCData = {
   areaName: "Gatanga",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 70578.98, percentage: 60.76 },
     Trees: { hectares: 27836.89, percentage: 23.96 },
@@ -115,9 +136,11 @@ const gatangaLULCData: LULCData = {
     "Bare Ground": { hectares: 622.57, percentage: 0.54 },
   },
 };
-const maragwaLULCData: LULCData = {
+
+const maragwaLULCData2022: LULCData = {
   areaName: "Maragwa",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 50109.62, percentage: 70.77 },
     Road: { hectares: 7788.51, percentage: 11.0 },
@@ -129,9 +152,11 @@ const maragwaLULCData: LULCData = {
     "Bare Ground": { hectares: 216.57, percentage: 0.31 },
   },
 };
-const mathioyaLULCData: LULCData = {
+
+const mathioyaLULCData2022: LULCData = {
   areaName: "Mathioya",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 36898.38, percentage: 51.72 },
     Trees: { hectares: 25588.45, percentage: 35.89 },
@@ -143,9 +168,11 @@ const mathioyaLULCData: LULCData = {
     "Bare Ground": { hectares: 14.05, percentage: 0.02 },
   },
 };
-const kandaraLULCData: LULCData = {
+
+const kandaraLULCData2022: LULCData = {
   areaName: "Kandara",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 54566.14, percentage: 82.14 },
     Road: { hectares: 4577.51, percentage: 6.89 },
@@ -157,9 +184,11 @@ const kandaraLULCData: LULCData = {
     Water: { hectares: 4.28, percentage: 0.01 },
   },
 };
-const kiharuLULCData: LULCData = {
+
+const kiharuLULCData2022: LULCData = {
   areaName: "Kiharu",
   level: "subcounty",
+  year: 2022,
   classes: {
     Crop: { hectares: 29279.09, percentage: 73.72 },
     Road: { hectares: 5622.21, percentage: 14.15 },
@@ -171,6 +200,105 @@ const kiharuLULCData: LULCData = {
     "Bare Ground": { hectares: 114.83, percentage: 0.29 },
   },
 };
+
+const gatangaLULCData2024: LULCData = {
+  areaName: "Gatanga",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 253.25, percentage: 0.82 },
+    Trees: { hectares: 27371.53, percentage: 88.22 },
+    Crop: { hectares: 1797.91, percentage: 5.79 },
+    Building: { hectares: 325.01, percentage: 1.05 },
+    "Bare Ground": { hectares: 1257.74, percentage: 4.05 },
+    Grass: { hectares: 20.32, percentage: 0.07 },
+  },
+};
+
+const kandaraLULCData2024: LULCData = {
+  areaName: "Kandara",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 0.27, percentage: 0.0 },
+    Trees: { hectares: 3878.44, percentage: 30.53 },
+    Crop: { hectares: 5832.11, percentage: 45.91 },
+    Building: { hectares: 604.88, percentage: 4.76 },
+    "Bare Ground": { hectares: 2365.11, percentage: 18.62 },
+    Grass: { hectares: 23.67, percentage: 0.19 },
+  },
+};
+
+const maragwaLULCData2024: LULCData = {
+  areaName: "Maragwa",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 58.5, percentage: 0.2 },
+    Trees: { hectares: 6404.61, percentage: 21.65 },
+    Crop: { hectares: 15732.16, percentage: 53.18 },
+    Building: { hectares: 1048.65, percentage: 3.54 },
+    "Bare Ground": { hectares: 5612.66, percentage: 18.97 },
+    Grass: { hectares: 726.92, percentage: 2.46 },
+  },
+};
+
+const kiharuLULCData2024: LULCData = {
+  areaName: "Kiharu",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 29.38, percentage: 0.09 },
+    Trees: { hectares: 5663.0, percentage: 16.55 },
+    Crop: { hectares: 19490.31, percentage: 56.94 },
+    Building: { hectares: 1568.85, percentage: 4.58 },
+    "Bare Ground": { hectares: 6864.53, percentage: 20.06 },
+    Grass: { hectares: 610.66, percentage: 1.78 },
+  },
+};
+
+const mathioyaLULCData2024: LULCData = {
+  areaName: "Mathioya",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 0.02, percentage: 0.0 },
+    Trees: { hectares: 30735.76, percentage: 65.83 },
+    Crop: { hectares: 11356.3, percentage: 24.32 },
+    Building: { hectares: 661.4, percentage: 1.42 },
+    "Bare Ground": { hectares: 3893.61, percentage: 8.34 },
+    Grass: { hectares: 42.33, percentage: 0.09 },
+  },
+};
+
+const kangemaLULCData2024: LULCData = {
+  areaName: "Kangema",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 0.17, percentage: 0.0 },
+    Trees: { hectares: 30799.44, percentage: 69.9 },
+    Crop: { hectares: 9572.76, percentage: 21.72 },
+    Building: { hectares: 607.61, percentage: 1.38 },
+    "Bare Ground": { hectares: 3050.61, percentage: 6.92 },
+    Grass: { hectares: 33.03, percentage: 0.07 },
+  },
+};
+
+const kigumoLULCData2024: LULCData = {
+  areaName: "Kigumo",
+  level: "subcounty",
+  year: 2024,
+  classes: {
+    Water: { hectares: 259.71, percentage: 0.59 },
+    Trees: { hectares: 31779.78, percentage: 72.37 },
+    Crop: { hectares: 7602.57, percentage: 17.31 },
+    Building: { hectares: 893.46, percentage: 2.03 },
+    "Bare Ground": { hectares: 3334.24, percentage: 7.59 },
+    Grass: { hectares: 44.06, percentage: 0.1 },
+  },
+};
+
 
 // Define your layers here
 const availableLayers: LayerConfig[] = [
@@ -184,8 +312,21 @@ const availableLayers: LayerConfig[] = [
       opacity: 0.8,
     },
   },
+
   {
-    id: 2,
+  id: 2,
+  name: "Muranga LULC 2024 KSA",
+  url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
+  layerName: "	Counties:LULC_MJF1 ",
+  type: "WMS",
+  style: {
+    opacity: 0.8,
+  },
+},
+
+
+  {
+    id: 3,
     name: "crop type",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "Counties:Crop classificatio Raster",
@@ -195,7 +336,7 @@ const availableLayers: LayerConfig[] = [
     },
   },
   {
-    id: 3,
+    id: 4,
     name: "GCI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "Counties:GCI ",
@@ -205,7 +346,7 @@ const availableLayers: LayerConfig[] = [
     },
   },
   {
-    id: 4,
+    id: 5,
     name: "NDVI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: " 	Counties:NDVI ",
@@ -215,7 +356,7 @@ const availableLayers: LayerConfig[] = [
     },
   },
   {
-    id: 5,
+    id: 6,
     name: "NDWI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "Agriculture:NDWI_Muranaga_2024 ",
@@ -226,7 +367,7 @@ const availableLayers: LayerConfig[] = [
   },
 
   {
-    id: 6,
+    id: 7,
     name: "GNDVI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "	Agriculture:GNDVI_Muranga ",
@@ -236,7 +377,7 @@ const availableLayers: LayerConfig[] = [
     },
   },
   {
-    id: 7,
+    id: 8,
     name: "Murang'a Subcounties",
     url: "data/sub_counties.geojson", // Local file in public folder
     layerName: "subcounties",
@@ -248,13 +389,14 @@ const availableLayers: LayerConfig[] = [
       opacity: 0.7,
     },
   },
+
 ];
 
 const MapView: React.FC = () => {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstanceRef = useRef<Map | null>(null);
   const [currentLULCData, setCurrentLULCData] =
-    useState<LULCData>(sampleLULCData);
+    useState<LULCData>(sampleLULCData2022);
   // State to manage active layers and their visibility
   const [activeLayers, setActiveLayers] = useState<ActiveLayer[]>([]);
   const [selectedLayerId, setSelectedLayerId] = useState<number | null>(null);
@@ -274,14 +416,46 @@ const MapView: React.FC = () => {
 
   // 2. Create a mapping object for subcounty data lookup
   const subcountyDataMap: { [key: string]: LULCData } = {
-    kangema: kangemaLULCData,
-    kigumo: kigumoLULCData,
-    gatanga: gatangaLULCData,
-    maragwa: maragwaLULCData,
-    mathioya: mathioyaLULCData,
-    kandara: kandaraLULCData,
-    kiharu: kiharuLULCData,
+    kangema: kangemaLULCData2022,
+    kigumo: kigumoLULCData2022,
+    gatanga: gatangaLULCData2022,
+    maragwa: maragwaLULCData2022,
+    mathioya: mathioyaLULCData2022,
+    kandara: kandaraLULCData2022,
+    kiharu: kiharuLULCData2022,
   };
+
+
+const subcountyDataMap2024: { [key: string]: LULCData } = {
+  kangema: kangemaLULCData2024,
+  kigumo: kigumoLULCData2024,
+  gatanga: gatangaLULCData2024,
+  maragwa: maragwaLULCData2024,
+  mathioya: mathioyaLULCData2024,
+  kandara: kandaraLULCData2024,
+  kiharu: kiharuLULCData2024,
+};
+
+
+
+
+
+
+const getCurrentLULCDataMaps = (layerId: number | null) => {
+  if (layerId === 2) { // Muranga LULC 2024 KSA
+    return {
+      countyData: sampleLULCData2024,
+      subcountyMap: subcountyDataMap2024
+    };
+  } else { // Default to 2022 data (KSA Microsoft AI4G or others)
+    return {
+      countyData: sampleLULCData2022,
+      subcountyMap: subcountyDataMap
+    };
+  }
+};
+
+
 
   useEffect(() => {
     if (!mapRef.current) return;
@@ -356,193 +530,195 @@ const MapView: React.FC = () => {
     });
   };
 
-  const createWMSLayer = (layerConfig: LayerConfig, opacity: number = 0.8) => {
-    return new TileLayer({
-      source: new TileWMS({
-        url: layerConfig.url,
-        params: {
-          LAYERS: layerConfig.layerName,
-          FORMAT: "image/png",
-          TRANSPARENT: true,
-        },
-        serverType: "geoserver",
-        transition: 0,
-      }),
-      opacity: opacity,
-    });
-  };
-
-  const createLocalGeoJSONLayer = (
-    layerConfig: LayerConfig,
-    opacity: number = 0.8
-  ) => {
-    const vectorSource = new VectorSource({
+const createWMSLayer = (layerConfig: LayerConfig, opacity: number = 0.8): TileLayer<TileWMS> => {
+  return new TileLayer({
+    source: new TileWMS({
       url: layerConfig.url,
-      format: new GeoJSON(),
-    });
-
-    const layer = new VectorLayer({
-      source: vectorSource,
-      style: createVectorStyle(layerConfig.style),
-    });
-
-    layer.setOpacity(opacity);
-
-    // Add hover and click interactions
-    if (mapInstanceRef.current && overlayRef) {
-      const map = mapInstanceRef.current;
-
-      const pointerMoveHandler = (evt: any) => {
-        const pixel = map.getEventPixel(evt.originalEvent);
-        const feature = map.forEachFeatureAtPixel(pixel, (feature, layer) => {
-          if (layer === layer) return feature;
-        });
-
-        const target = map.getTarget();
-        const targetElement = target instanceof Element ? target : null;
-
-        if (feature) {
-          const admen2 = feature.get("ADM2_EN") || "Unknown Area";
-          const coordinate = evt.coordinate;
-
-          overlayRef.setPosition(coordinate);
-          overlayRef.getElement()!.innerHTML = `<strong>${admen2}</strong><br><small>Click to view data</small>`;
-          overlayRef.getElement()!.style.display = "block";
-
-          if (targetElement) {
-            (targetElement as HTMLElement).style.cursor = "pointer";
-          }
-        } else {
-          overlayRef.getElement()!.style.display = "none";
-          if (targetElement) {
-            (targetElement as HTMLElement).style.cursor = "";
-          }
-        }
-      };
-
-      // NEW: Add click handler
-      const clickHandler = (evt: any) => {
-        const pixel = map.getEventPixel(evt.originalEvent);
-        const feature = map.forEachFeatureAtPixel(pixel, (feature, layer) => {
-          if (layer === layer) return feature;
-        });
-
-        if (feature) {
-          const subcountyName = feature.get("ADM2_EN");
-          if (subcountyName) {
-            // Convert to lowercase for matching
-            const normalizedName = subcountyName.toLowerCase().trim();
-
-            // Look for matching LULC data
-            const matchingData = subcountyDataMap[normalizedName];
-
-            if (matchingData) {
-              // Update the dashboard data
-              setCurrentLULCData(matchingData);
-
-              // Show dashboard if it was hidden
-              setIsDashboardVisible(true);
-
-              // Optional: Show a brief notification
-              console.log(`Updated dashboard with data for: ${subcountyName}`);
-            } else {
-              // Fallback to county data if subcounty not found
-              setCurrentLULCData(sampleLULCData);
-              setIsDashboardVisible(true);
-              console.log(
-                `No specific data found for ${subcountyName}, showing county data`
-              );
-            }
-          }
-        }
-      };
-
-      map.on("pointermove", pointerMoveHandler);
-      map.on("click", clickHandler); // Add click listener
-
-      // Store both handlers for cleanup
-      layer.set("pointerMoveHandler", pointerMoveHandler);
-      layer.set("clickHandler", clickHandler);
-    }
-
-    return layer;
-  };
-
-  const createWFSLayer = (layerConfig: LayerConfig, opacity: number = 0.8) => {
-    // Check if this is our local GeoJSON layer
-    if (layerConfig.id === 7) {
-      return createLocalGeoJSONLayer(layerConfig, opacity);
-    }
-
-    // Original WFS logic for remote layers
-    const vectorSource = new VectorSource({
-      format: new GeoJSON(),
-      url: function (extent) {
-        return `${
-          layerConfig.url
-        }?service=WFS&version=1.1.0&request=GetFeature&typename=${
-          layerConfig.layerName
-        }&outputFormat=application/json&srsname=EPSG:3857&bbox=${extent.join(
-          ","
-        )},EPSG:3857`;
+      params: {
+        LAYERS: layerConfig.layerName,
+        FORMAT: "image/png",
+        TRANSPARENT: true,
       },
-      strategy: bboxStrategy,
-    });
+      serverType: "geoserver",
+      transition: 0,
+    }),
+    opacity: opacity,
+  });
+};
 
-    const layer = new VectorLayer({
-      source: vectorSource,
-      style: createVectorStyle(layerConfig.style),
-    });
+const createWFSLayer = (layerConfig: LayerConfig, opacity: number = 0.8): VectorLayer<VectorSource> | null => {
+  // Check if this is our local GeoJSON layer
+  if (layerConfig.id === 8) { // Changed from 7 to 8 based on your layer config
+    return createLocalGeoJSONLayer(layerConfig, opacity);
+  }
 
-    layer.setOpacity(opacity);
-    return layer;
-  };
+  // Original WFS logic for remote layers
+  const vectorSource = new VectorSource({
+    format: new GeoJSON(),
+    url: function (extent) {
+      return `${
+        layerConfig.url
+      }?service=WFS&version=1.1.0&request=GetFeature&typename=${
+        layerConfig.layerName
+      }&outputFormat=application/json&srsname=EPSG:3857&bbox=${extent.join(
+        ","
+      )},EPSG:3857`;
+    },
+    strategy: bboxStrategy,
+  });
 
-  const addLayer = (layerConfig: LayerConfig) => {
-    if (!mapInstanceRef.current) return;
+  const layer = new VectorLayer({
+    source: vectorSource,
+    style: createVectorStyle(layerConfig.style),
+  });
 
-    // Check if layer already exists
-    const existingLayer = activeLayers.find((l) => l.id === layerConfig.id);
-    if (existingLayer) return;
+  layer.setOpacity(opacity);
+  return layer;
+};
 
-    const opacity = layerConfig.style?.opacity || 0.8;
-    let olLayer: TileLayer<TileWMS> | VectorLayer<VectorSource>;
+const createLocalGeoJSONLayer = (
+  layerConfig: LayerConfig,
+  opacity: number = 0.8
+): VectorLayer<VectorSource> => {
+  const vectorSource = new VectorSource({
+    url: layerConfig.url,
+    format: new GeoJSON(),
+  });
 
-    // Create layer based on type
-    switch (layerConfig.type) {
-      case "WMS":
-        olLayer = createWMSLayer(layerConfig, opacity);
-        break;
-      case "WFS":
-        olLayer = createWFSLayer(layerConfig, opacity);
-        break;
-      default:
-        return;
-    }
+  const layer = new VectorLayer({
+    source: vectorSource,
+    style: createVectorStyle(layerConfig.style),
+  });
 
-    mapInstanceRef.current.addLayer(olLayer);
+  layer.setOpacity(opacity);
 
-    const newActiveLayer: ActiveLayer = {
-      ...layerConfig,
-      visible: true,
-      opacity: opacity,
-      olLayer: olLayer,
+  // Add hover and click interactions
+  if (mapInstanceRef.current && overlayRef) {
+    const map = mapInstanceRef.current;
+
+    const pointerMoveHandler = (evt: any) => {
+      const pixel = map.getEventPixel(evt.originalEvent);
+      const feature = map.forEachFeatureAtPixel(pixel, (feature, layer) => {
+        if (layer === layer) return feature;
+      });
+
+      const target = map.getTarget();
+      const targetElement = target instanceof Element ? target : null;
+
+      if (feature) {
+        const admen2 = feature.get("ADM2_EN") || "Unknown Area";
+        const coordinate = evt.coordinate;
+
+        overlayRef.setPosition(coordinate);
+        overlayRef.getElement()!.innerHTML = `<strong>${admen2}</strong><br><small>Click to view data</small>`;
+        overlayRef.getElement()!.style.display = "block";
+
+        if (targetElement) {
+          (targetElement as HTMLElement).style.cursor = "pointer";
+        }
+      } else {
+        overlayRef.getElement()!.style.display = "none";
+        if (targetElement) {
+          (targetElement as HTMLElement).style.cursor = "";
+        }
+      }
     };
 
-    setActiveLayers((prev) => {
-      // Double-check to prevent duplicates
-      if (prev.some((l) => l.id === layerConfig.id)) return prev;
-      return [...prev, newActiveLayer];
-    });
+    const clickHandler = (evt: any) => {
+      const pixel = map.getEventPixel(evt.originalEvent);
+      const feature = map.forEachFeatureAtPixel(pixel, (feature, layer) => {
+        if (layer === layer) return feature;
+      });
 
-    setSelectedLayerId(layerConfig.id);
-    setIsDropdownOpen(false);
+      if (feature) {
+        const subcountyName = feature.get("ADM2_EN");
+        if (subcountyName) {
+          const normalizedName = subcountyName.toLowerCase().trim();
+          
+          // Get current data maps based on selected layer
+          const { countyData, subcountyMap } = getCurrentLULCDataMaps(selectedLayerId);
+          
+          // Look for matching LULC data
+          const matchingData = subcountyMap[normalizedName];
 
-    // Show dashboard when MSAI4G layer (id: 1) is added
-    if (layerConfig.id === 1) {
-      setIsDashboardVisible(true);
-    }
+          if (matchingData) {
+            setCurrentLULCData(matchingData);
+            setIsDashboardVisible(true);
+            console.log(`Updated dashboard with ${matchingData.year} data for: ${subcountyName}`);
+          } else {
+            setCurrentLULCData(countyData);
+            setIsDashboardVisible(true);
+            console.log(`No specific data found for ${subcountyName}, showing ${countyData.year} county data`);
+          }
+        }
+      }
+    };
+
+    map.on("pointermove", pointerMoveHandler);
+    map.on("click", clickHandler);
+
+    // Store both handlers for cleanup
+    layer.set("pointerMoveHandler", pointerMoveHandler);
+    layer.set("clickHandler", clickHandler);
+  }
+
+  return layer;
+};
+
+const addLayer = (layerConfig: LayerConfig) => {
+  if (!mapInstanceRef.current) return;
+
+  // Check if layer already exists
+  const existingLayer = activeLayers.find((l) => l.id === layerConfig.id);
+  if (existingLayer) return;
+
+  const opacity = layerConfig.style?.opacity || 0.8;
+  let olLayer: TileLayer<TileWMS> | VectorLayer<VectorSource>;
+
+  // Create layer based on type
+  switch (layerConfig.type) {
+    case "WMS":
+      olLayer = createWMSLayer(layerConfig, opacity);
+      break;
+    case "WFS":
+      const wfsLayer = createWFSLayer(layerConfig, opacity);
+      if (!wfsLayer) {
+        console.error("Failed to create WFS layer");
+        return;
+      }
+      olLayer = wfsLayer;
+      break;
+    default:
+      console.error("Unknown layer type:", layerConfig.type);
+      return;
+  }
+
+  mapInstanceRef.current.addLayer(olLayer);
+
+  const newActiveLayer: ActiveLayer = {
+    ...layerConfig,
+    visible: true,
+    opacity: opacity,
+    olLayer: olLayer,
   };
+
+  setActiveLayers((prev) => {
+    // Double-check to prevent duplicates
+    if (prev.some((l) => l.id === layerConfig.id)) return prev;
+    return [...prev, newActiveLayer];
+  });
+
+  setSelectedLayerId(layerConfig.id);
+  setIsDropdownOpen(false);
+
+  // Show dashboard and set appropriate data when LULC layers are added
+  if (layerConfig.id === 1 || layerConfig.id === 2) {
+    setIsDashboardVisible(true);
+    const { countyData } = getCurrentLULCDataMaps(layerConfig.id);
+    setCurrentLULCData(countyData);
+  }
+};
+
   // 4. Update the removeLayer function to clean up click handlers
   const removeLayer = (layerId: number) => {
     if (!mapInstanceRef.current) return;
@@ -587,24 +763,29 @@ const MapView: React.FC = () => {
   };
 
   // Update the toggleLayerVisibility function
-  const toggleLayerVisibility = (layerId: number) => {
-    setActiveLayers((prev) =>
-      prev.map((layer) => {
-        if (layer.id === layerId && layer.olLayer) {
-          const newVisible = !layer.visible;
-          layer.olLayer.setVisible(newVisible);
+const toggleLayerVisibility = (layerId: number) => {
+  setActiveLayers((prev) =>
+    prev.map((layer) => {
+      if (layer.id === layerId && layer.olLayer) {
+        const newVisible = !layer.visible;
+        layer.olLayer.setVisible(newVisible);
 
-          // Show/hide dashboard when MSAI4G layer visibility changes
-          if (layerId === 1) {
-            setIsDashboardVisible(newVisible);
+        // Show/hide dashboard and update data when LULC layers visibility changes
+        if (layerId === 1 || layerId === 2) {
+          setIsDashboardVisible(newVisible);
+          if (newVisible) {
+            // Update to appropriate year data when layer becomes visible
+            const { countyData } = getCurrentLULCDataMaps(layerId);
+            setCurrentLULCData(countyData);
           }
-
-          return { ...layer, visible: newVisible };
         }
-        return layer;
-      })
-    );
-  };
+
+        return { ...layer, visible: newVisible };
+      }
+      return layer;
+    })
+  );
+};
   const updateLayerOpacity = (layerId: number, opacity: number) => {
     setActiveLayers((prev) =>
       prev.map((layer) => {
@@ -644,10 +825,10 @@ const MapView: React.FC = () => {
 
   const selectedLayer = activeLayers.find((l) => l.id === selectedLayerId);
 
-  const resetToCountyData = () => {
-    setCurrentLULCData(sampleLULCData);
-  };
-
+const resetToCountyData = () => {
+  const { countyData } = getCurrentLULCDataMaps(selectedLayerId);
+  setCurrentLULCData(countyData);
+};
   return (
     <div className="relative w-full h-full overflow-hidden">
       {/* Map Container */}
@@ -659,7 +840,7 @@ const MapView: React.FC = () => {
           onClick={resetToCountyData}
           className="px-3 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors"
         >
-          📍 County View
+        🌍  County View
         </button>
         <button
           onClick={() => setIsDashboardVisible(!isDashboardVisible)}
@@ -669,7 +850,7 @@ const MapView: React.FC = () => {
               : "bg-white text-gray-700 hover:bg-gray-50"
           }`}
         >
-          📊 {isDashboardVisible ? "Hide" : "Show"} Analytics
+        📊 {isDashboardVisible ? "Hide" : "Show"} Analytics
         </button>
 
         {isDashboardVisible && (
