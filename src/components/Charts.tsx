@@ -237,20 +237,20 @@ const LULCDashboard: React.FC<LULCDashboardProps> = ({ data = sampleData }) => {
             className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
               activeView === "doughnut"
                 ? "bg-blue-100 text-blue-700 shadow-md"
-                : "text-gray-600 hover:bg-gray-100"
+                : "text-gray-600 bg-gray-100 hover:bg-gray-200"
             }`}
           >
-            📊 Distribution View
+             Distribution View
           </button>
           <button
             onClick={() => setActiveView("bar")}
-            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+            className={`px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300  ${
               activeView === "bar"
                 ? "bg-blue-100 text-blue-700 shadow-md"
-                : "text-gray-600 hover:bg-gray-100"
+                : "text-gray-600 bg-gray-100 hover:bg-gray-200"
             }`}
           >
-            📈 Comparison View
+          Comparison View
           </button>
         </div>
       </div>
@@ -275,7 +275,7 @@ const LULCDashboard: React.FC<LULCDashboardProps> = ({ data = sampleData }) => {
               <h3 className="text-lg font-semibold text-gray-800 mb-4">
                 Land Use Classes
               </h3>
-              <div className="space-y-2 max-h-64 overflow-y-auto">
+              <div className="space-y-2 max-h-64 overflow-y-auto overflow-x-hidden">
                 {classes.map((className, index) => (
                   <div
                     key={className}
