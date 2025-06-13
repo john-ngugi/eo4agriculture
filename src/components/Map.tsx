@@ -335,8 +335,21 @@ const availableLayers: LayerConfig[] = [
       opacity: 0.8,
     },
   },
-  {
+    {
     id: 4,
+    name: "Kenya Subcounties",
+    url: "data/sub_counties.geojson", 
+    layerName: "subcounties",
+    type: "WFS", 
+    style: {
+      fill: "rgba(255, 165, 0, 0.1)",
+      stroke: "#ff6b35",
+      strokeWidth: 2,
+      opacity: 0.7,
+    },
+  },
+  {
+    id: 5,
     name: "GCI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "Counties:GCI ",
@@ -346,7 +359,7 @@ const availableLayers: LayerConfig[] = [
     },
   },
   {
-    id: 5,
+    id: 6,
     name: "NDVI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: " 	Counties:NDVI ",
@@ -356,7 +369,7 @@ const availableLayers: LayerConfig[] = [
     },
   },
   {
-    id: 6,
+    id: 7,
     name: "NDWI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "Agriculture:NDWI_Muranaga_2024 ",
@@ -367,7 +380,7 @@ const availableLayers: LayerConfig[] = [
   },
 
   {
-    id: 7,
+    id: 8,
     name: "GNDVI",
     url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
     layerName: "	Agriculture:GNDVI_Muranga ",
@@ -376,17 +389,45 @@ const availableLayers: LayerConfig[] = [
       opacity: 0.8,
     },
   },
-  {
-    id: 8,
-    name: "Murang'a Subcounties",
-    url: "data/sub_counties.geojson", // Local file in public folder
-    layerName: "subcounties",
-    type: "WFS", // We'll treat it as WFS for vector handling
+
+    {
+    id: 9,
+    name: "Elevation",
+    url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
+    layerName: "	Counties:Elevation_Muranga ",
+    type: "WMS",
     style: {
-      fill: "rgba(255, 165, 0, 0.1)",
-      stroke: "#ff6b35",
-      strokeWidth: 2,
-      opacity: 0.7,
+      opacity: 0.8,
+    },
+  },
+    {
+    id: 10,
+    name: "Slope",
+    url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
+    layerName: "	Counties:SlopeMuranga ",
+    type: "WMS",
+    style: {
+      opacity: 0.8,
+    },
+  },
+    {
+    id: 11,
+    name: "RainFall",
+    url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
+    layerName: "	Counties:AnnualRainfall_2024Muranga ",
+    type: "WMS",
+    style: {
+      opacity: 0.8,
+    },
+  },
+    {
+    id: 12,
+    name: "Aspect",
+    url: "https://geoserver-service-ksa.ksa.go.ke/geoserver/wms",
+    layerName: "Counties:aspectMuranga ",
+    type: "WMS",
+    style: {
+      opacity: 0.8,
     },
   },
 
@@ -515,7 +556,7 @@ const getCurrentLULCDataMaps = (layerId: number | null) => {
       }),
       stroke: new Stroke({
         color: styleConfig?.stroke || "#0000ff",
-        width: styleConfig?.strokeWidth || 1,
+        width: styleConfig?.strokeWidth || 2,
       }),
       image: new Circle({
         radius: 5,
@@ -524,7 +565,7 @@ const getCurrentLULCDataMaps = (layerId: number | null) => {
         }),
         stroke: new Stroke({
           color: styleConfig?.stroke || "#0000ff",
-          width: styleConfig?.strokeWidth || 1,
+          width: styleConfig?.strokeWidth || 2,
         }),
       }),
     });
@@ -548,7 +589,7 @@ const createWMSLayer = (layerConfig: LayerConfig, opacity: number = 0.8): TileLa
 
 const createWFSLayer = (layerConfig: LayerConfig, opacity: number = 0.8): VectorLayer<VectorSource> | null => {
   // Check if this is our local GeoJSON layer
-  if (layerConfig.id === 8) { // Changed from 7 to 8 based on your layer config
+  if (layerConfig.id === 4) { // Changed from 7 to 8 based on your layer config
     return createLocalGeoJSONLayer(layerConfig, opacity);
   }
 
@@ -727,7 +768,7 @@ const addLayer = (layerConfig: LayerConfig) => {
     if (!layerToRemove || !layerToRemove.olLayer) return;
 
     // Clean up event handlers for local GeoJSON layer
-    if (layerId === 7) {
+    if (layerId === 4) {
       const pointerHandler = layerToRemove.olLayer.get("pointerMoveHandler");
       const clickHandler = layerToRemove.olLayer.get("clickHandler");
 
@@ -959,8 +1000,8 @@ const resetToCountyData = () => {
 
               {/* Active Layers List */}
               <div className="max-h-96 overflow-y-auto">
-                {activeLayers.map((layer) => (
-                  <div
+                {activeLayers.map((layer) => (                  
+                <div
                     key={layer.id}
                     className={`border-b border-gray-100 last:border-b-0 ${
                       selectedLayerId === layer.id ? "bg-blue-50" : "bg-white"
